@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model MyLedger.Models.AmountViewModel
+
+<div id="index_page">
+
+    <h1 class="text-center my-1">Transactions List</h1>
+
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <h3 class="mb-0">Total Amount: @Model.TotalAmount</h3>
+
+        <a class="btn btn-primary" asp-area="" asp-controller="Amounts" asp-action="Create">Create</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Bank</th>
+                <th>Amount</th>
+                <th>Created At</th>
+                <th>Opt</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Amount)
+            {
+                <tr>
+                    <td>@item.Bank</td>
+                    <td>@item.AmountValue.ToString("C")</td> <!-- C = currency format -->
+                    <td>@item.CreatedAt.ToString("yyyy-MM-dd")</td>
+                    <td id="Opt_Buttons">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
